@@ -1,0 +1,22 @@
+# disable actuator composite health check at consul
+management:
+  health:
+    consul:
+      enabled: false
+
+spring:
+  application:
+    name: client
+  cloud:
+    consul:
+      host: ${CONSUL_SERVER:http://dev-consul.in}
+      port: 8500
+      config:
+        prefix: config/
+        fail-fast: true
+        acl-token: ${CONSUL_ACL_TOKEN:xxxxx}
+        format: properties
+
+        # disable consul distributed config watcher
+        watch:
+          enabled: false
